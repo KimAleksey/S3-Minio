@@ -44,13 +44,13 @@ def main():
         )
 
     # Загрузка данных за 2025-год
-    for i in range(1, 2):
+    for i in range(1, 13):
         # Фиксируем время старта
         start = time.time()
         # Имя файла - имя, с которым выгружается файл
         filename = f"yellow_tripdata_2025-{i:02}.parquet"
         # Путь до файла
-        file_path = "./yellow_tripdata_2025/" + filename
+        filepath = "./" + filename
         # Ссылка для скачивания файла - для каждого месяца меняется
         url = f"https://d37ci6vzurychx.cloudfront.net/trip-data/{filename}"
         # INFO - Start
@@ -72,13 +72,13 @@ def main():
                 part_size=10 * 1024 * 1024, # 50MB
                 content_type=r.headers.get("Content-Type", "application/octet-stream"),
             )
-            logging.info(f"Downloaded {filename} into {file_path}")
+            end = time.time()
+            # INFO - End
+            logging.info(f"Downloaded {filename} into {filepath}")
+            logging.info(f"End of downloading {filename}.")
+            logging.info(f"{filename} was downloaded in {round((end - start), 2)} seconds.")
         except Exception as e:
-            logging.error(e)
-        end = time.time()
-        # INFO - End
-        logging.info(f"End of downloading {filename}.")
-        logging.info(f"{filename} was downloaded in {round((end - start), 2)} seconds.")
+            raise RuntimeError(f"Failed to download {filename}: {e}")
     logging.info(f"End of downloading data into Minio.")
 
 if __name__ == "__main__":
