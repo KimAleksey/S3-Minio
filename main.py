@@ -2,15 +2,12 @@ import logging
 import time
 
 from requests import get
-
 from minio import Minio
 
 # Импорт из локальной переменной секретных данных
 from dotenv import load_dotenv
 from os import getenv
 from pathlib import Path
-
-
 
 # Конфигурация логирования
 logging.basicConfig(
