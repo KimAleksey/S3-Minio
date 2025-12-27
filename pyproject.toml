@@ -1,0 +1,10 @@
+[project]
+name = "project-1-minio-intro"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "minio==7.2.7",
+    "pandas==2.2.2",
+]
